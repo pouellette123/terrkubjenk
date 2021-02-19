@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Git Clone Repository') {
             steps {
-                sh 'git clone https://github.com/pouellette123/2020_03_DO_Boston_casestudy_part_1'
+                sh 'git clone https://github.com/pouellette123/$APP_NAME'
             }
         }
         stage('Build the Docker Image') {
