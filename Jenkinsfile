@@ -38,7 +38,10 @@ pipeline {
         }
         stage('Test the Container') {
             steps {
+                // test with a curl
                 sh 'curl -s --head  --request GET  10.0.0.143:8079 | grep 200'
+                // stop the container, don't want port confilct 
+                sh 'if (docker ps | grep $CONTAINER_NAME); then docker stop $CONTAINER_NAME;fi'
             }
         }
         stage('Push the Image to DockerHub') {
@@ -55,9 +58,9 @@ pipeline {
         stage('Deploy with Terraform to Kubernetes Cluster') {
             steps {
                 // Initialize Terraform
-                sh '$APP_HOME/terraform init'
+                sh 'terraform init'
                 // Apply Terraform
-                sh '$APP_HOME/terraform apply -auto-approve'
+                sh 'terraform apply -auto-approve'
             }
         }
     }
