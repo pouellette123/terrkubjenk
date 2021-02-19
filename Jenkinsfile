@@ -52,12 +52,13 @@ pipeline {
 //                echo "Image built and pushed to repository"
             }
         }
-        // stage('Deploy to Kubernetes') {
-            // steps {
-                // withCredentials([sshUserPrivateKey(credentialsId: 'key3', keyFileVariable: 'KEY', usernameVariable: 'USERSSH')]) {
-                        // sh 'ssh -i ${KEY} ${USERSSH}@10.0.0.143 -C \"kubectl set image deployment/capstone-deployment capstone-container=${DOCKER_HUB_REPO}:${BUILD_NUMBER}\"'
-                // }        
-            // }
-        // }
+        stage('Deploy with Terraform to Kubernetes Cluster') {
+            steps {
+                // Initialize Terraform
+                sh '$APP_HOME/terraform init'
+                // Apply Terraform
+                sh '$APP_HOME/terraform apply -auto-approve'
+            }
+        }
     }
 }
