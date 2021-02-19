@@ -52,7 +52,7 @@ resource "kubernetes_deployment" "flask" {
       }
       spec {
         container {
-          image = "pouellette123/terrkubjenk"
+          image = "pouellette123/terrkubjenk:latest"
           name  = "example"
 
           port {
