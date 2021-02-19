@@ -5,7 +5,7 @@ pipeline {
     }
     environment {
         APP_NAME = "terrkubjenk"
-        APP_HOME = "$JENKINS_HOME/workspace/$APP_NAME"
+        APP_HOME = "$JENKINS_HOME/workspace/TerrKubJen/$APP_NAME"
         DOCKER_HUB_REPO = "pouellette123/terrkubjenk"
         CONTAINER_NAME = "terrkubjenk"
     }
