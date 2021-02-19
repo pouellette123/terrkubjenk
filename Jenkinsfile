@@ -4,9 +4,10 @@ pipeline {
         pollSCM '* * * * *'
     }
     environment {
-        APP_HOME = "$JENKINS_HOME/workspace/2020_03_DO_Boston_casestudy_part_1/2020_03_DO_Boston_casestudy_part_1/"
-        DOCKER_HUB_REPO = "pouellette123/capstone"
-        CONTAINER_NAME = "capstone"
+        APP_NAME = "terrkubjenk"
+        APP_HOME = "$JENKINS_HOME/workspace/$APP_NAME"
+        DOCKER_HUB_REPO = "pouellette123/terrkubjenk"
+        CONTAINER_NAME = "terrkubjenk"
     }
     options {
         skipStagesAfterUnstable()
@@ -51,12 +52,12 @@ pipeline {
 //                echo "Image built and pushed to repository"
             }
         }
-        stage('Deploy to Kubernetes') {
-            steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'key3', keyFileVariable: 'KEY', usernameVariable: 'USERSSH')]) {
-                        sh 'ssh -i ${KEY} ${USERSSH}@10.0.0.143 -C \"kubectl set image deployment/capstone-deployment capstone-container=${DOCKER_HUB_REPO}:${BUILD_NUMBER}\"'
-                }        
-            }
-        }
+        // stage('Deploy to Kubernetes') {
+            // steps {
+                // withCredentials([sshUserPrivateKey(credentialsId: 'key3', keyFileVariable: 'KEY', usernameVariable: 'USERSSH')]) {
+                        // sh 'ssh -i ${KEY} ${USERSSH}@10.0.0.143 -C \"kubectl set image deployment/capstone-deployment capstone-container=${DOCKER_HUB_REPO}:${BUILD_NUMBER}\"'
+                // }        
+            // }
+        // }
     }
 }
