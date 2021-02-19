@@ -61,7 +61,7 @@ pipeline {
                 sh 'terraform init'
                 // Apply Terraform
                 sh 'terraform apply -auto-approve'
-                sh 'kubectl set image deployment/scalable-flask-example example=${DOCKER_HUB_REPO}:latest'
+                sh 'kubectl set image deployment/scalable-flask-example example=${DOCKER_HUB_REPO}:${BUILD_NUMBER}'
             }
         }
     }
