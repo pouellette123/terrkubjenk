@@ -1,0 +1,26 @@
+- name: deploy flask app
+   k8s:
+     api_version: v1
+     namespace: default 
+     definition:
+       kind: Deployment
+       metadata:
+         labels:
+           app: capstoneapp
+         name: capstone-deployment
+       spec:
+         replicas: 3
+         selector:
+           matchLabels:
+             app: capstoneapp
+         template:
+           metadata:
+             labels:
+               app: capstoneapp
+           spec:
+             containers:
+               - name: capstone-container
+                 image: "{{ image_id }}"
+                 ports:
+                 - containerPort: 8079
+                   protocol: TCP

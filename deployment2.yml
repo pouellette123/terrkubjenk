@@ -1,0 +1,23 @@
+- name: deploy flask app
+  api_version: v1
+  namespace: default
+  kind: Deployment
+   metadata:
+     name: capstone-deployment
+     labels:
+       app: capstoneapp
+   spec:
+     replicas: 3
+     selector:
+       matchLabels:
+         app: capstoneapp
+     template:
+       metadata:
+         labels:
+           app: capstoneapp
+       spec:
+         containers:
+         - name: capstone-container
+           image: pouellette123/capstone
+           ports:
+           - containerPort: 8079
